@@ -84,18 +84,20 @@ class: center, middle, inverse
 
 # What even is webpack?
 
-webpack is a module bundler.
-
-Essentially it makes this work in the browser: 
-
-```
-var bootstrap = require('bootstrap');
+### webpack is a module bundler.
 ---
-class: center, middle, inverse
+class: left, middle, inverse
 
-# What even is webpack?
+## Essentially it makes this work in the browser: 
 
-webpack will also bundle and minify your code by default, resulting in smaller js bundles
+```javascript
+var bootstrap = require('bootstrap');
+```
+---
+class: left, middle, inverse
+
+# webpack will also bundle and minify your code by default
+# This results in smaller js bundles
 ---
 class: center, middle, inverse
 
@@ -103,27 +105,20 @@ class: center, middle, inverse
 ---
 class: left, middle, inverse
 
-### It is used by:
+# It is used by:
 
 - [AngularCLI](https://cli.angular.io/)
 ---
 class: left, middle, inverse
 
-### It is used by:
-
-- [AngularCLI](https://cli.angular.io/)
-- [VueCLI](https://cli.vuejs.org/)
----
-class: left, middle, inverse
-
-### It is used by:
+# It is used by:
 
 - [AngularCLI](https://cli.angular.io/)
 - [VueCLI](https://cli.vuejs.org/)
 ---
 class: left, middle, inverse
 
-### It is used by:
+# It is used by:
 
 - [AngularCLI](https://cli.angular.io/)
 - [VueCLI](https://cli.vuejs.org/)
@@ -131,7 +126,7 @@ class: left, middle, inverse
 ---
 class: left, middle, inverse
 
-### It is used by:
+# It is used by:
 
 - [AngularCLI](https://cli.angular.io/)
 - [VueCLI](https://cli.vuejs.org/)
@@ -149,25 +144,43 @@ class: left, middle, inverse
 ---
 class: left, middle, inverse
 
-# [Entry](link)
+# [Entry](https://webpack.js.org/concepts/entry-points/)
 
 - Entry point for our application
 ---
 class: left, middle, inverse
 
-# [Entry](link)
+# [Entry](https://webpack.js.org/concepts/entry-points/)
 
-- Entry point for our application
-- webpack starts here and creates a [dependency graph](link)
+## From here, webpack determines which modules should be included 
 ---
 class: left, middle, inverse
 
-# [Entry](link)
+# [Entry](https://webpack.js.org/concepts/entry-points/)
 
-### From here, webpack determines which modules should be included in our app _based on what our app is using_.
+## From here, webpack determines which modules should be included 
+## This is based on what our app is using
+---
+class: left, middle, inverse
+
+# [Entry](https://webpack.js.org/concepts/entry-points/)
+
+## From here, webpack determines which modules should be included 
+## This is based on what our app is using
+## This is almost always going to be your index.js file
+---
+class: left, middle, inverse
+
+# [Entry](https://webpack.js.org/concepts/entry-points/)
+
+- Entry point for our application
+- webpack starts here and creates a [dependency graph](https://webpack.js.org/concepts/dependency-graph/)
 
 </textarea>
 <script src="./scripts/remark-latest.min.js"></script>
+<script>
+  var slideshow = remark.create();
+</script>
 
 </body>
 </html>
