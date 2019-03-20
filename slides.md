@@ -64,11 +64,74 @@
 
 class: center, middle, inverse
 
-# Intro to [webpack](link)
+# Intro to [webpack](https://webpack.js.org/)
 ---
 class: center, middle, inverse
 
-# Intro to [webpack](link)
+# Intro to [webpack](https://webpack.js.org/)
+---
+class: center, middle, inverse
+
+# What even is webpack?
+---
+class: center, middle, inverse
+
+# What even is webpack?
+
+webpack is a module bundler.
+---
+class: center, middle, inverse
+
+# What even is webpack?
+
+webpack is a module bundler.
+
+Essentially it makes this work in the browser: 
+
+```
+var bootstrap = require('bootstrap');
+---
+class: center, middle, inverse
+
+# webpack is the de facto standard module bundler across the web
+---
+class: left, middle, inverse
+
+### It is used by:
+
+- [AngularCLI](https://cli.angular.io/)
+---
+class: left, middle, inverse
+
+### It is used by:
+
+- [AngularCLI](https://cli.angular.io/)
+- [VueCLI](https://cli.vuejs.org/)
+---
+class: left, middle, inverse
+
+### It is used by:
+
+- [AngularCLI](https://cli.angular.io/)
+- [VueCLI](https://cli.vuejs.org/)
+---
+class: left, middle, inverse
+
+### It is used by:
+
+- [AngularCLI](https://cli.angular.io/)
+- [VueCLI](https://cli.vuejs.org/)
+- [Create React App](https://facebook.github.io/create-react-app/)
+---
+class: left, middle, inverse
+
+### It is used by:
+
+- [AngularCLI](https://cli.angular.io/)
+- [VueCLI](https://cli.vuejs.org/)
+- [Create React App](https://facebook.github.io/create-react-app/)
+- Basically any scaffold you find
+---
 
 
 </textarea>
