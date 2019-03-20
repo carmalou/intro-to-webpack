@@ -93,6 +93,12 @@ var bootstrap = require('bootstrap');
 ---
 class: center, middle, inverse
 
+# What even is webpack?
+
+webpack will also bundle and minify your code by default, resulting in smaller js bundles
+---
+class: center, middle, inverse
+
 # webpack is the de facto standard module bundler across the web
 ---
 class: left, middle, inverse
@@ -132,7 +138,33 @@ class: left, middle, inverse
 - [Create React App](https://facebook.github.io/create-react-app/)
 - Basically any scaffold you find
 ---
+class: left, middle, inverse
 
+# The four parts of a webpack config
+
+1. Entry
+2. Output
+3. Loaders
+4. Plugins
+---
+class: left, middle, inverse
+
+# [Entry](link)
+
+- Entry point for our application
+---
+class: left, middle, inverse
+
+# [Entry](link)
+
+- Entry point for our application
+- webpack starts here and creates a [dependency graph](link)
+---
+class: left, middle, inverse
+
+# [Entry](link)
+
+### From here, webpack determines which modules should be included in our app _based on what our app is using_.
 
 </textarea>
 <script src="./scripts/remark-latest.min.js"></script>
