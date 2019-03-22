@@ -78,13 +78,7 @@ class: center, middle, inverse
 
 # What even is webpack?
 
-webpack is a module bundler.
----
-class: center, middle, inverse
-
-# What even is webpack?
-
-### webpack is a module bundler.
+## webpack is a module bundler.
 ---
 class: left, middle, inverse
 
@@ -167,14 +161,40 @@ class: left, middle, inverse
 
 ## From here, webpack determines which modules should be included 
 ## This is based on what our app is using
-## This is almost always going to be your index.js file
+## Entry is almost always going to be your index.js file
 ---
 class: left, middle, inverse
 
-# [Entry](https://webpack.js.org/concepts/entry-points/)
+# [Output](https://webpack.js.org/concepts#output)
 
-- Entry point for our application
-- webpack starts here and creates a [dependency graph](https://webpack.js.org/concepts/dependency-graph/)
+## Location where our built files are output
+---
+class: left, middle, inverse
+
+# [Output](https://webpack.js.org/concepts#output)
+
+## Location where our built files are output
+## Must be an absolute path
+---
+class: left, middle, inverse
+
+## A bare minimum webpack config:
+
+```javascript
+// webpack.config.js
+
+const path = require('path');
+
+module.exports = {
+  entry: './index.js',
+  output: {
+    path: path.resolve(__dirname, 'dist'),
+    filename: 'my-little-webpack.js'
+  }
+};
+
+```
+<sub>Source: [My Little Webpack](https://github.com/DevinClark/my-little-webpack)</sub>
 
 </textarea>
 <script src="./scripts/remark-latest.min.js"></script>
