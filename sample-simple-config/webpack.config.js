@@ -1,3 +1,5 @@
+// source: https://github.com/DevinClark/my-little-webpack
+
 const path = require('path');
 
 module.exports = {
