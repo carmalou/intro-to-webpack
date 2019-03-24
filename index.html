@@ -213,8 +213,45 @@ class: left, middle, inverse
 # HTML modules
 
 ## Build your HTML templates into the dist directory using a loader!
+---
+class: left, middle, inverse
 
+# [css-loader](https://github.com/webpack-contrib/css-loader)
+```javascript
+// webpack.config.js
 
+module.exports = {
+  module: {
+    /* ... */
+    rules: [
+      {
+        test: /\.css$/,
+        use: ['style-loader', 'css-loader'],
+      },
+    ],
+  },
+};
+```
+<sub>Source: [css-loader](https://github.com/webpack-contrib/css-loader#getting-started)</sub>
+---
+class:left,middle,inverse
+
+# [html-loader](https://github.com/webpack-contrib/html-loader)
+
+```javascript
+// webpack.config.js
+
+module: {
+  rules: [{
+    test: /\.html$/,
+    use: [ {
+      loader: 'html-loader',
+      options: { /* ... */ }
+    }],
+  }]
+}
+```
+<sub>Source: [html-loader](https://github.com/webpack-contrib/html-loader#examples)</sub>
 
 </textarea>
 <script src="./scripts/remark-latest.min.js"></script>
