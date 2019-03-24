@@ -252,6 +252,50 @@ module: {
 }
 ```
 <sub>Source: [html-loader](https://github.com/webpack-contrib/html-loader#examples)</sub>
+---
+class:left,middle,inverse
+
+# [Plugins](https://webpack.js.org/concepts#plugins)
+
+## Plugins are little bits of JavaScript that can be run on the entire bundle.
+---
+class:left,middle,inverse
+
+# [Plugins](https://webpack.js.org/concepts#plugins)
+
+## Plugins are little bits of JavaScript that can be run on the entire bundle.
+## Where loaders are used for transforming files, plugins can be used for *anything*.
+---
+class:left,middle,inverse
+
+# [DefinePlugin](https://webpack.js.org/plugins/define-plugin/)
+
+```javascript
+// webpack.config.js
+
+new webpack.DefinePlugin({
+  PRODUCTION: JSON.stringify(true)
+});
+```
+
+```javascript
+// index.js
+
+if(PRODUCTION) {
+  // do this
+} else {
+  // do that
+}
+```
+<sub>Source: [html-loader](https://webpack.js.org/plugins/define-plugin/#usage)</sub>
+---
+class:left,middle,inverse
+
+# Resources:
+
+## - [webpack.js.org](https://webpack.js.org/)
+## - [webpack.academy](https://webpack.academy/)
+
 
 </textarea>
 <script src="./scripts/remark-latest.min.js"></script>
