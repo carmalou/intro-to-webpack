@@ -89,7 +89,7 @@ class: center, middle, inverse
 ## webpack is a module bundler.
 
 ???
-Any third-party dependency that your client requires will be bundled by webpack.
+Any third-party dependency that your client requires will be bundled by webpack. A bundle can also include any javascript files _you_ wrote that are separate from the index file. 
 ---
 class: left, middle, inverse
 
@@ -98,15 +98,23 @@ class: left, middle, inverse
 ```javascript
 var bootstrap = require('bootstrap');
 ```
+???
+Even though `require` is a very common paradigm in javascript, it's not actually supported in browsers in a standalone way. webpack is what's going to make this work.
 ---
 class: left, middle, inverse
 
 # webpack will also bundle and minify your code by default
 # This results in smaller js bundles
+
+???
+This is probably pretty self-explanatory -- smaller bundles result in fast page loads. This is something webpack is providing by default. Code is minified out of the box without any additional config.
 ---
 class: center, middle, inverse
 
 # webpack is the de facto standard module bundler across the web
+
+???
+webpack is on version 4 now, and since it was created, its really taken over as the main bundler for web apps. this includes being the main bundler for frameworks.
 ---
 class: left, middle, inverse
 
@@ -150,14 +158,36 @@ class: left, middle, inverse
 
 ## Angular-CLI doesn't build a webpack file
 ## if you check the angular-cli [`package.json`](https://github.com/angular/angular-cli/blob/master/package.json#L98), you'll see a webpack dependency
+
+???
+since we use angular here, I wanted to give it some specific attention and talk about how it's using webpack.
+
+even though angular-cli doesn't provide a webpack file in the project you new up, it's using webpack. angular cli uses webpack to bundle any CSS and transpile typescript into browser-usable javascript. angular-cli is essentially working as a wrapper around webpack for these purposes.
 ---
 class: left, middle, inverse
 
-# A note about Angular-CLI
+# webpack pre-reqs
 
-## Angular-CLI doesn't build a webpack file
-## if you check the angular-cli [`package.json`](https://github.com/angular/angular-cli/blob/master/package.json#L98), you'll see a webpack dependency
-## `ng-eject` will give you a complete `webpack.config.js` file 
+## - [Node](https://nodejs.org/en/)
+## - [NPM](https://www.npmjs.com/)
+
+???
+these are the two tools you'll need installed to be able to use webpack
+---
+class: left, middle, inverse
+
+# webpack installation
+
+```git
+$ npm install webpack --save-dev
+$ npm install webpack-cli --save-dev
+$ npm install webpack-dev-server --save-dev // this one is optional
+```
+
+???
+these are the three things we need to install to our application -- _if we are doing our own webpack config_. the last one is optional, but really nice for running a dev server.
+
+if you aren't familiar with the `--save-dev` flag, that instructs the module to be saved as a dev dependency, which means it _will not_ be included in a production build.
 ---
 class: left, middle, inverse
 
@@ -167,30 +197,44 @@ class: left, middle, inverse
 2. Output
 3. Loaders
 4. Plugins
+
+???
+a webpack config will _always_ consist of the first two parts in order to create a working bundle. the third and fourth parts will _usually_ be there, but are optional. let's look at each part individually.
 ---
 class: left, middle, inverse
 
 # [Entry](https://webpack.js.org/concepts/entry-points/)
 
-- Entry point for our application
+## Entry point for our application
+
+???
+entry in this case means the javascript file that the browser accesses _first_ through an html file.
 ---
 class: left, middle, inverse
 
 # [Entry](https://webpack.js.org/concepts/entry-points/)
 
-## From here, webpack determines which modules should be included 
+## Entry point for our application
+## From here, webpack determines which modules should be included
 ---
 class: left, middle, inverse
 
 # [Entry](https://webpack.js.org/concepts/entry-points/)
 
+## Entry point for our application
 ## From here, webpack determines which modules should be included 
 ## This is based on what our app is using
+
+???
+this is where webpack really shines. we don't need to define each and every file we want webpack to bundle. instead webpack will look at which modules are required in our entry file. next it'll look at _those_ files and find their required modules. this continues until there aren't any more required modules. this has a 2-fold impact. first, like we talked about before, you don't need to explicitly define all of the modules you'd like to include.
+
+secondly, because webpack is only bundling what you're actually using, you end up with the smallest possible bundle, versus say, bundling your entire node_modules directory.
 ---
 class: left, middle, inverse
 
 # [Entry](https://webpack.js.org/concepts/entry-points/)
 
+## Entry point for our application
 ## From here, webpack determines which modules should be included 
 ## This is based on what our app is using
 ## Entry is almost always going to be your index.js file
@@ -200,6 +244,9 @@ class: left, middle, inverse
 # [Output](https://webpack.js.org/concepts#output)
 
 ## Location where our built files are output
+
+???
+we tell webpack where we'd like the completed bundle to be placed. this is usually going to be a `build` or `dist` folder.
 ---
 class: left, middle, inverse
 
@@ -207,6 +254,9 @@ class: left, middle, inverse
 
 ## Location where our built files are output
 ## Must be an absolute path
+
+???
+now that we've gone over entry and output -- the two must-haves for a webpack config -- let's take a look at a tiny, bare-bones webpack config.
 ---
 class: left, middle, inverse
 
@@ -218,7 +268,7 @@ class: left, middle, inverse
 const path = require('path');
 
 module.exports = {
-  entry: './index.js',
+  entry: './src/index.js',
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'my-little-webpack.js'
@@ -227,24 +277,44 @@ module.exports = {
 
 ```
 <sub>Source: [My Little Webpack](https://github.com/DevinClark/my-little-webpack)</sub>
+
+???
+we talked before about how a webpack config is really just an object, and you can see that here. we're requiring path, which comes from free with node -- its not something additional we need to install.
+
+but below that we're just exporting an object. it has an entry property like we discussed before. quick note that that is a relative path, so just keep that in mind.
+
+it also has an output property with an object. there we are defining the `path` and the `filename` properties. `filename` is just a string, but be sure to always include the `.js` extension.
+
+`path` is taking advantage of the path module from node to give us an absolute path. we're using `__dirname` which resolves to the current file path of the file running, and then append the name of the directory we'd like to build the files in.
+
+now that we know how to build a bare minimum webpack config, let's talk about how we can do even more than bundle basic javascript files.
 ---
 class: left, middle, inverse
 
 # [Loaders](https://webpack.js.org/concepts/loaders/)
 
 ## Loaders allow you to require non-JavaScript or JSON files
+
+???
+Loaders are essentially javascript functions used to transform files into something useable in the browser.
 ---
 class: left, middle, inverse
 
 # CSS modules
 
 ## Build your CSS into the dist directory using a loader!
+
+???
+CSS files are a great example, because we'll typically want them to be included in the same folder as our bundled javascript. webpack offers a css bundler that allows us to streamline our build process to include javascript files and css files.
 ---
 class: left, middle, inverse
 
 # HTML modules
 
 ## Build your HTML templates into the dist directory using a loader!
+
+???
+if you have a modal in your app, you might not want a long ugly string of html in your client. it can look cluttered and be confusing. a great option is to move this string to its own template file. once your template is in its own file, you can use webpack to bundle your file into the dist folder.
 ---
 class: left, middle, inverse
 
@@ -265,6 +335,30 @@ module.exports = {
 };
 ```
 <sub>Source: [css-loader](https://github.com/webpack-contrib/css-loader#getting-started)</sub>
+
+???
+we'll define a `rules` property which contains an array of objects. each object will have a `test` property which is a regex to determine if the file is affected by this "rule". if so, we'll designate which loaders to use and webpack does the rest.
+
+now that we've configured webpack, let's check out how we would use this in the client
+---
+class:left,middle,inverse
+
+# In the app
+
+```javascript
+// index.js
+
+var css = require('file/path/of/style.css');
+```
+
+```html
+// index.html
+
+<link href='./dist/style.css' rel="stylesheet" />
+```
+
+???
+we'll still go ahead and require the CSS in the JavaScript, which may seem backward but remember that webpack is finding the files to bundle via `require`. over in the HTML we just link the CSS the way we normally would.
 ---
 class:left,middle,inverse
 
@@ -284,6 +378,25 @@ module: {
 }
 ```
 <sub>Source: [html-loader](https://github.com/webpack-contrib/html-loader#examples)</sub>
+
+???
+this loader config is slightly different than the CSS one. notice that the `use` array is accepting an object this time. this property can accept either an array of strings or an array of objects.
+
+you'd want to just the array of objects syntax if you wanted to specify options on your loader. so for instance, this particular loader includes an option to remove whitespace from the HTML file, and we'd specify that in the `options` object.
+---
+class:left,middle,inverse
+
+# In the app
+
+```javascript
+var template = require('../template.html');
+
+// call modal
+modal(template);
+```
+
+???
+once the template is required, webpack will bundle it for us and then we can treat it like a variable and access it accordingly. this is much nicer than having a multi-line string of html cluttering up our client logic.
 ---
 class:left,middle,inverse
 
@@ -297,6 +410,9 @@ class:left,middle,inverse
 
 ## Plugins are little bits of JavaScript that can be run on the entire bundle.
 ## Where loaders are used for transforming files, plugins can be used for *anything*.
+
+???
+You might be wondering how these are different than loaders since both are running javascript. it's a pretty subtle differentiation, but essentially loaders are focusing on transforming files, where plugins are focusing on anything else.
 ---
 class:left,middle,inverse
 
@@ -319,7 +435,16 @@ if(PRODUCTION) {
   // do that
 }
 ```
-<sub>Source: [html-loader](https://webpack.js.org/plugins/define-plugin/#usage)</sub>
+<sub>Source: [define-plugin](https://webpack.js.org/plugins/define-plugin/)</sub>
+
+???
+This is a plugin we're actually using in projects here, and we actually use it pretty similarly to this. Let's step through what we're doing here.
+
+within DefinePlugin, we can specify keys to an object, and we can call them whatever we want. In this example, we are defining a production variable and setting it to true.
+
+after the bundle is created, the production variable will be accessible across all of our client logic. if we had any logic that was dependent on being in prod -- or _not_ being in prod -- this is a great way to specify that across the entire application.
+
+let's take a look at how we're using this here.
 ---
 class:left,middle,inverse
 
@@ -328,6 +453,7 @@ class:left,middle,inverse
 ## - [webpack.js.org](https://webpack.js.org/)
 ## - [webpack.academy](https://webpack.academy/)
 ## - [webpack for Angular Developers](https://hackernoon.com/webpack-for-angular-developers-c8584a60e627)
+## - [This is how angular-cli/webpack delivers your CSS styles to the client](https://blog.angularindepth.com/this-is-how-angular-cli-webpack-delivers-your-css-styles-to-the-client-d4adf15c4975)
 
 
 </textarea>
